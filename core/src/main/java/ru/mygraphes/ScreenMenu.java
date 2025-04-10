@@ -33,9 +33,9 @@ public class ScreenMenu implements Screen {
 
         imgBG = new Texture("Mainmain.jpg");
 
-        btnGraphes = new GraphesButton(font, "Graphes", 250, 1100);
-        btnAbout = new GraphesButton(font, "About", 250, 500);
-        btnExit = new GraphesButton(font, "Exit", 250, 300);
+        btnGraphes = new GraphesButton(font, "Graphes", 250, 1000);
+        btnAbout = new GraphesButton(font, "About", 250, 700);
+        btnExit = new GraphesButton(font, "Exit", 250, 400);
     }
 
     @Override
