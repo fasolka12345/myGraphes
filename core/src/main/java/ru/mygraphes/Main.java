@@ -1,34 +1,43 @@
 package ru.mygraphes;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.math.Vector3;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class Main extends ApplicationAdapter {
-    private SpriteBatch batch;
-    private Texture image;
+public class Main extends Game {
+    public static final float SCR_WIDTH = 900;
+    public static final float SCR_HEIGHT = 1600;
+
+    public SpriteBatch batch;
+    public OrthographicCamera camera;
+    public Vector3 touch;
+    public BitmapFont font;
+
+    ScreenMenu screenMenu;
+    ScreenGraphes screenGraphes;
+    ScreenAbout screenAbout;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
-    }
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, SCR_WIDTH, SCR_HEIGHT);
+        touch = new Vector3();
+        font = new BitmapFont(Gdx.files.internal("opel90gray.fnt"));
 
-    @Override
-    public void render() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.draw(image, 140, 210);
-        batch.end();
+        screenMenu = new ScreenMenu(this);
+        screenGraphes = new ScreenGraphes(this);
+        screenAbout = new ScreenAbout(this);
+        setScreen(screenAbout);
+        setScreen(screenMenu);
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        image.dispose();
+        font.dispose();
     }
 }
